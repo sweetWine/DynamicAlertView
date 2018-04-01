@@ -73,7 +73,7 @@
         }else if (index == 1) {
             NSLog(@"点击了取消");
         }
-    } WithTitles:@"确定", @"取消", nil];
+    } WithTitles:@"确定", @"取消", nil];    
 }
 
 @end

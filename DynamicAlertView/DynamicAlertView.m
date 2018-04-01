@@ -16,6 +16,7 @@
 // !!!: 设置alertView的宽和高
 #define alertViewWidth          300.0*frameScale
 #define alertViewHeight         185.0*frameScale
+#define btnItemHeight           40
 
 @interface DynamicAlertView ()
 {
@@ -116,7 +117,7 @@ static DynamicAlertView *alertView = nil;
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10*frameScale, 10*frameScale, alertViewWidth - 20*frameScale, alertViewHeight - (20 + 40)*frameScale)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10*frameScale, 10*frameScale, alertViewWidth - 20*frameScale, alertViewHeight - (20 + btnItemHeight)*frameScale)];
         _titleLabel.font = [UIFont systemFontOfSize:17.0*frameScale];
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -144,10 +145,10 @@ static DynamicAlertView *alertView = nil;
     }
     
     if (titles.count == 2) {
-        _clickView.frame = CGRectMake(0, alertViewHeight - 40*frameScale, alertViewWidth, 40*frameScale);
+        _clickView.frame = CGRectMake(0, alertViewHeight - btnItemHeight*frameScale, alertViewWidth, btnItemHeight*frameScale);
         for (int i = 0; i < 2; i++) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(alertViewWidth / 2 * i, 0, alertViewWidth / 2, 40*frameScale);
+            btn.frame = CGRectMake(alertViewWidth / 2 * i, 0, alertViewWidth / 2, btnItemHeight*frameScale);
             btn.tag = BaseTag + i;
             [btn setTitle:titles[i] forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -158,13 +159,13 @@ static DynamicAlertView *alertView = nil;
             btn.layer.borderWidth = .5f;
         }
     } else {
-        _clickView.frame = CGRectMake(0, 120*frameScale, alertViewWidth, 40*titles.count*frameScale);
+        _clickView.frame = CGRectMake(0, alertViewHeight - btnItemHeight*frameScale, alertViewWidth, btnItemHeight*titles.count*frameScale);
         CGRect rect = self.frame;
-        rect.size.height = alertViewHeight + _clickView.frame.size.height - 40*frameScale;
+        rect.size.height = alertViewHeight + _clickView.frame.size.height - btnItemHeight*frameScale;
         self.frame = rect;
         for (int i = 0; i < titles.count; i++) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(0, 40*i*frameScale, alertViewWidth, 40*frameScale);
+            btn.frame = CGRectMake(0, btnItemHeight*i*frameScale, alertViewWidth, btnItemHeight*frameScale);
             btn.tag = BaseTag + i;
             [btn setTitle:titles[i] forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
